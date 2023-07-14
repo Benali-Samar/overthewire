@@ -32,15 +32,15 @@ The USB subsystem consists of the USB core, the USB Host Controller, and the USB
 
 Here is a minimal overview of the USB subsystem:
 
-				                 User Space      
+				               User Space      
 		----------------|--------------------
-		        	|        Kernel Space
+		        	|              Kernel Space
 		       +--------|--------+
 		       |        |        |
 		       |   USB Driver    |
 		       |                 |
 		       +--------|--------+
-        			|       USB subsystem
+        			|              USB subsystem
 		   +------------------------+        
 		   |   +--------|--------+  |
 		   |   |        |        |  |
@@ -55,7 +55,7 @@ Here is a minimal overview of the USB subsystem:
 		   |            |           |
 		   +------------|-----------+
 		        	|
-		        USB Device
+		           USB Device
 
 
 -USB Host Controller:
