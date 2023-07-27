@@ -1,6 +1,18 @@
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/usb.h>
+#include <linux/fs.h>
+#include <linux/cdev.h>
+
+
+//-------TO DO--------
+// [*]Change major and minor numbers allocation dynamically by malloc ....
+// [*]Prepare the data struct for device data analysis
+
+#define OVERTHEWIRE_MINOR_BASE 250          // change it to 0 maybe ????
+
+
+
 
 #define IS_NEW_METHOD_USED ( 0 )
 
@@ -37,6 +49,55 @@
 }
 
 
+//----Open file function----
+static int overthewire_open(struct inode *inode, struct file *file)
+{
+  pr_info("%s\n", __func__);
+  return 0;
+}
+
+//---- Realese file function----
+static int overthewire_release(struct inode *inode, struct file *file)
+{
+  pr_info("%s\n", __func__);
+  return 0;
+}
+
+//----Write file function----
+static ssize_t overthewire_write(struct file *file, const char *user_buffer, size_t count, loff_t *ppos)
+{
+  pr_info("%s\n", __func__);
+  return 0;
+}
+
+//----Read file function----
+static ssize_t overthewire_read(struct file *file, char *buffer, size_t count, loff_t *ppos)
+{
+  pr_info("%s\n", __func__);
+  return 0;
+}
+
+
+//----File operation----
+static const struct file_operations overthewire_fops =
+{
+  .owner   = THIS_MODULE, 
+  .open    = overthewire_open, 
+  .release = overthewire_release, 
+  .read    = overthewire_read, 
+  .write   = overthewire_write,
+};
+
+
+//----class driver----
+static struct usb_class_driver overthewire_class = 
+{
+  .name ="overthewire",
+  .fops = &overthewire_fops,
+  .minor_base= OVERTHEWIRE_MINOR_BASE,
+};
+
+
 //----PROBE----
 static int usb_probe(struct usb_interface *interface, const struct usb_device_id *id)
 {
@@ -51,6 +112,28 @@ static int usb_probe(struct usb_interface *interface, const struct usb_device_id
 	{
 		PRINT_USB_ENDPOINT_DESCRIPTOR(iface_desc -> endpoint[i].desc);
 	}
+
+// char dev routines here 
+//
+ // struct cdev cdev;
+ // dev_t devno;
+//  int err;
+
+  // Initialize cdev structure
+//  cdev_init(&cdev, NULL);
+//  cdev.owner = THIS_MODULE;
+
+  // Create device number
+//  devno = MKDEV(MAJOR_NUM, MINOR_NUM);
+
+  // Add the character device to the system
+//  err = cdev_add(&cdev, devno, 1);
+//  if (err) {
+ //   dev_err(&interface->dev, "Error adding character device\n");
+ //   return err;
+ // }
+ 
+//
 	return 0;
 }
 
