@@ -1,4 +1,4 @@
-obj-m:= usb_driver.o
+obj-m:= overthewire.o
 
 
 all:
