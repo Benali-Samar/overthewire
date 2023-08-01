@@ -80,3 +80,10 @@ USB Devices contains a number of descriptors that help define what device is cap
     -Interface Descriptor: A device can have one or more interfaces. Each interface descriptor can have a number of endpoints and represents a functional unit belonging to a particular class.
     
     -Endpoint Descriptor: Each endpoint descriptor is used to specify the type of transfer, direction, polling interval, and maximum packet size for each endpoint. In other words, each endpoint is a source or sink of data.
+
+Created a rule under : /etc/udev/rules.d/overthewire.rules
+worte : SUBSYSTEM=="usb", ATTR{idVendor}=="2717", ATTR{idProduct}=="ff40", MODE="0666", SYMLINK+="overthewire"
+
+updated the /dev with :sudo udevadm trigger
+
+
